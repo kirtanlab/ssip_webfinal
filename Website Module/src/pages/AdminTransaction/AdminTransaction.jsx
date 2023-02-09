@@ -79,7 +79,7 @@ const AdminTransaction = ({ totalCustomers, token_main, wallet }) => {
                 <p>+2%</p>
               </div>
               <div className="box-right-bottom green">
-                <CurrencyRupeeSharpIcon />
+              <Link to='/admin-dashboard/Payment'><button className="gen2">Pay</button></Link>
               </div>
             </div>
           </div>
