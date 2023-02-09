@@ -11,6 +11,7 @@ import Chart from "../Chart/Chart";
 import RevenueBox from "../RevenueBox/RevenueBox";
 
 const Wallet = () => {
+  const [month, setMonth] = React.useState("current");
   return (
     <div className="home-container">
       <div className="top-components">
@@ -31,20 +32,31 @@ const Wallet = () => {
           </div>
         </div>
 
-        <div className="wallet-box">
+        <div className="admin-box box-report">
           <div className="box-left">
-            <p className="box-title">CURRENT ORDERS</p>
-            <p className="box-value">143</p>
-            <p className="box-desc">See All Orders</p>
-          </div>
-          <div className="box-right">
-            <div className="box-right-top red">
-              <KeyboardArrowDownSharpIcon />
-              <p>-1%</p>
-            </div>
-            <div className="box-right-bottom yellow">
-              <ShoppingCartIcon />
-            </div>
+            <p className="box-title">MONTHLY REPORT</p>
+            {/* <p className="month-name">Month</p> */}
+            <select
+              value={month}
+              onChange={(e) => {
+                setMonth(e.target.value);
+                console.log(e.target.value);
+              }}
+              id="month"
+              style={{ padding: "5px" }}
+            >
+              <option value="current">Current</option>
+              <option value="prev">Previous</option>
+            </select>
+            <a
+              href={
+                month === "prev"
+                  ? `${API.canteen_server}/api/v1/canteen/lastMonthReport`
+                  : `${API.canteen_server}/api/v1/canteen/thisMonthReport`
+              }
+            >
+              Generate
+            </a>
           </div>
         </div>
 

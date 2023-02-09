@@ -73,7 +73,10 @@ const CollapsibleBox = ({
           <button
             type="button"
             className="completed1"
-            onClick={completedButton()}
+            onClick={() => {
+              console.log("clicked");
+              completedButton();
+            }}
           >
             <p className="completed_text">Completed</p>
           </button>
@@ -101,7 +104,7 @@ const CollapsibleBox = ({
                 className="completed2"
                 onClick={completedHandler}
               >
-                <p className="completed_text">Completed</p>
+                <p className="completed_text">Completed12</p>
               </button>
               <p className="completed_text" style={{ display: "flex" }}>
                 OTP: {otp}
@@ -115,7 +118,7 @@ const CollapsibleBox = ({
               className="completed2"
               onClick={completedHandler}
             >
-              <p className="completed_text">Completed</p>
+              <p className="completed_text">Completed23</p>
             </button>
           </div>
         )}
