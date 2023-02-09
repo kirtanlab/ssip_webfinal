@@ -1,6 +1,13 @@
-import Reac, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { API } from "../../constants/API";
 import axios from "axios";
+import AdminNavbar from "../../components/AdminNavbar/AdminNavbar";
+import PropTypes from "prop-types";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import "./Payment.css";
 
 // const Payment = () => {
 //   let [date, setDate] = React.useState("07/02/2023");
@@ -116,19 +123,41 @@ import axios from "axios";
 
 const ProductDisplay = () => (
   <section>
-    <div className="product">
-      <img
-        src="https://i.imgur.com/EHyR2nP.png"
-        alt="The cover of Stubborn Attachments"
-      />
-      <div className="description">
-        <h3>Stubborn Attachments</h3>
-        <h5>$20.00</h5>
+    <div className="admin-container">
+      <div className="admin-outer">
+        <AdminNavbar />
+        <Box sx={{ width: "100%" }}>
+          <Box
+            sx={{ borderBottom: 1, borderColor: "divider" }}
+            className="pay_tabs"
+          >
+            <Tabs
+              // value={value}
+              // onChange={handleChange}
+              aria-label="basic tabs example"
+            >
+              <Tab label="UPI" />
+              <Tab label="CHECK" />
+            </Tabs>
+          </Box>
+          {/* 
+          <TabPanel value={value} index={0}>
+            <MenuCardList data={IceCreams} />
+          </TabPanel>
+
+          <TabPanel value={value} index={1}>
+            <MenuCardList data={MainCourse} />
+          </TabPanel>
+
+          <TabPanel value={value} index={2}>
+            <MenuCardList data={Starters} />
+          </TabPanel> */}
+        </Box>
+        <form action="/create-checkout-session" method="POST">
+          <button type="submit">Checkout</button>
+        </form>
       </div>
     </div>
-    <form action="/create-checkout-session" method="POST">
-      <button type="submit">Checkout</button>
-    </form>
   </section>
 );
 
