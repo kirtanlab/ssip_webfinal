@@ -14,12 +14,16 @@ import { API } from "../../constants/API";
 import * as WalletActions from "../../store/actions/wallet";
 const AdminTransaction = ({ totalCustomers, token_main, wallet }) => {
   const [_orders, setOrders] = useState([]);
+  const [month, setMonth] = useState("Current");
   const navigate = useNavigate();
   useEffect(() => {
     if (!token_main) {
       navigate("/");
     }
   }, []);
+  function handleGenerate() {
+    console.log("generate", month);
+  }
   const fetchHistory = async () => {
     const data = await axios.get(
       `${API.admin_server}/api/v1/admin/orders?status=COMPLETED`,
@@ -87,11 +91,27 @@ const AdminTransaction = ({ totalCustomers, token_main, wallet }) => {
             <div className="box-left">
               <p className="box-title">MONTHLY REPORT</p>
               {/* <p className="month-name">Month</p> */}
-              <select name="month" id="month" style={{ padding: "5px" }}>
+              <select
+                value={month}
+                onChange={(e) => {
+                  setMonth(e.target.value);
+                  console.log(e.target.value);
+                }}
+                id="month"
+                style={{ padding: "5px" }}
+              >
                 <option value="current">Current</option>
                 <option value="prev">Previous</option>
               </select>
-              <button className="gen">Generate</button>
+              <a
+                href={
+                  // month === "prev"
+                  "http://127.0.0.1:5000/api/v1/admin/lastmonthreport"
+                  // : "http://127.0.0.1:5000/api/v1/admin/thismonthreport"
+                }
+              >
+                Generate
+              </a>
             </div>
           </div>
         </div>

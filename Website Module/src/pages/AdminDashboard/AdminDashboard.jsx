@@ -23,6 +23,7 @@ const AdminDashboard = ({
 }) => {
   const [search, setSearch] = useState("");
   const [searchres, setSearchres] = useState([]);
+  const [month, setMonth] = useState("current");
   const navigate = useNavigate();
   useEffect(() => {
     if (!token_main) {
@@ -31,6 +32,27 @@ const AdminDashboard = ({
     setOrderHistory();
     setWalletPrice();
   }, []);
+  // const handleGenerate = async () => {
+  //   console.log("calledgen");
+  //   if (month == "current") {
+  //     console.log("calledgen1");
+  //     try {
+  //     } catch (err) {
+  //       throw err;
+  //     }
+  //   } else {
+  //     console.log("calledgen2");
+  //     await axios.get(`${API.admin_server}/api/v1/admin/lastmonthreport`, {
+  //       headers: {
+  //         Authorization: `Bearer ${token_main}`,
+  //       },
+  //     });
+  //   }
+  //   console.log("calledgen3");
+  // };
+  // function handleGenerate(month) {
+  //   console.log("generate", month);
+  // }
   async function handleChange(e) {
     console.log("e.target.value", e.target.value);
     setSearch(e.target.value);
@@ -99,11 +121,33 @@ const AdminDashboard = ({
             <div className="box-left">
               <p className="box-title">MONTHLY REPORT</p>
               {/* <p className="box-value">Month</p> */}
-              <select name="month" id="month" style={{ padding: "5px" }}>
+              {/* <input list="months" name="month" id="month">
+
+              </input type=""> */}
+              <select
+                value={month}
+                onChange={(e) => {
+                  setMonth(e.target.value);
+                  console.log(e.target.value);
+                }}
+                id="month"
+                style={{ padding: "5px" }}
+              >
                 <option value="current">Current</option>
                 <option value="prev">Previous</option>
               </select>
-              <button className="gen">Generate</button>
+              {/* <button onClick={handleGenerate} className="gen"> */}
+              <a
+                href={
+                  // month === "prev"
+                  "http://127.0.0.1:5000/api/v1/admin/lastmonthreport"
+                  // : "http://127.0.0.1:5000/api/v1/admin/thismonthreport"
+                }
+              >
+                Generate
+              </a>
+
+              {/* </button> */}
             </div>
           </div>
         </div>

@@ -52,26 +52,26 @@ const Chart = () => {
     //   name,
     //   qty,
     // }));
-    let temp_data = [data.data.Graph];
-    var result = temp_data.map((a) => a.foo);
-    console.log(result);
+    // let temp_data = [data.data.Graph];
+    // var result = temp_data.map((a) => a.foo);
+    // console.log(result);
     // You can use Object.keys() and map() to do this
     // var obj = {"1":5,"2":7,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0}
-    var result = Object.keys(data.data.Graph).map((key) => [
-      key,
-      data.data.Graph[key],
-    ]);
+    // var result = Object.keys(data.data.Graph).map((key) => [
+    //   key,
+    //   data.data.Graph[key],
+    // ]);
     // console.log(result.length);
     // console.log("data", data.data.Graph);
-    let final_object = {};
-    for (var i = 0, j = 0; i < result.length; i++) {
-      final_object[i].dish_name = result[i][j];
-      j++;
-      final_object[i].orders = result[i][j];
-      j = 0;
-    }
+    // let final_object = {};
+    // for (var i = 0, j = 0; i < result.length; i++) {
+    //   final_object[i].dish_name = result[i][j];
+    //   j++;
+    //   final_object[i].orders = result[i][j];
+    //   j = 0;
+    // }
     // console.log("final_object", final_object);
-    setData(data);
+    setData(data.data.Graph);
   };
 
   React.useEffect(() => {
@@ -94,15 +94,10 @@ const Chart = () => {
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="dish_name" />
+        <XAxis dataKey="name" />
         <YAxis />
         <Tooltip />
-        <Area
-          type="monotone"
-          dataKey="orders"
-          stroke="#8884d8"
-          fill="#8884d8"
-        />
+        <Area type="monotone" dataKey="qty" stroke="#8884d8" fill="#8884d8" />
       </AreaChart>
     </ResponsiveContainer>
   );

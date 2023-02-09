@@ -54,7 +54,7 @@ const HomeOwnerDashboard = ({
       getCurrentOrders();
       console.log("item", newOrder);
       setTime(Date.now());
-    }, 5000);
+    }, 2000);
 
     return () => {
       clearInterval(interval);
@@ -87,10 +87,10 @@ const HomeOwnerDashboard = ({
                   newOrder.map((item) => {
                     return (
                       <CollapsibleBox
-                        _button={item.data.button}
-                        orderId={item.data._id}
+                        _button={item.orderdetail.button}
+                        orderId={item.orderdetail._id}
                         item_arr={item.items}
-                        otp={item.data.otp}
+                        otp={item.orderdetail.otp}
                         cust_name={item.userdetail.username}
                       />
                     );
