@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { API } from "../../constants/API";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import AdminNavbar from "../../components/AdminNavbar/AdminNavbar";
 import PropTypes from "prop-types";
@@ -8,6 +9,10 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import "./Payment.css";
+// import AdminNavbar from "../../components/AdminNavbar/AdminNavbar";
+import AccountBoxRoundedIcon from "@mui/icons-material/AccountBoxRounded";
+import CurrencyRupeeSharpIcon from "@mui/icons-material/CurrencyRupeeSharp";
+import KeyboardArrowUpSharpIcon from "@mui/icons-material/KeyboardArrowUpSharp";
 
 // const Payment = () => {
 //   let [date, setDate] = React.useState("07/02/2023");
@@ -121,45 +126,195 @@ import "./Payment.css";
 // };
 // export default Payment;
 
-const ProductDisplay = () => (
-  <section>
-    <div className="admin-container">
-      <div className="admin-outer">
-        <AdminNavbar />
-        <Box sx={{ width: "100%" }}>
-          <Box
-            sx={{ borderBottom: 1, borderColor: "divider" }}
-            className="pay_tabs"
-          >
-            <Tabs
-              // value={value}
-              // onChange={handleChange}
-              aria-label="basic tabs example"
-            >
-              <Tab label="UPI" />
-              <Tab label="CHECK" />
-            </Tabs>
-          </Box>
-          {/* 
-          <TabPanel value={value} index={0}>
-            <MenuCardList data={IceCreams} />
-          </TabPanel>
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
 
-          <TabPanel value={value} index={1}>
-            <MenuCardList data={MainCourse} />
-          </TabPanel>
-
-          <TabPanel value={value} index={2}>
-            <MenuCardList data={Starters} />
-          </TabPanel> */}
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
         </Box>
-        <form action="/create-checkout-session" method="POST">
-          <button type="submit">Checkout</button>
-        </form>
-      </div>
+      )}
     </div>
-  </section>
-);
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
+const ProductDisplay = ({ token_main, wallet, totalCustomers }) => {
+  const [value, setValue] = useState(0);
+  const [card, setCard] = useState(false);
+  const [select, setSelect] = useState(false);
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  const handleChangeRadio = (e) => {
+    setSelect("true");
+
+    if (e.target.value === "card") {
+      setCard(true);
+    }else{
+      setCard(false)
+    }
+  };
+
+  return (
+    <section>
+      <div className="admin-container">
+        <div className="admin-outer">
+          <AdminNavbar />
+          <div className="top-components">
+            <div className="admin-box">
+              <div className="box-left">
+                <p className="box-title">USERS</p>
+                <p className="box-value">
+                  {totalCustomers ? totalCustomers : 0}
+                </p>
+                <Link
+                  to="/admin-dashboard"
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  <p className="box-desc">See All Users</p>
+                </Link>
+              </div>
+              <div className="box-right">
+                <div className="box-right-top green">
+                  <KeyboardArrowUpSharpIcon />
+                  <p>+5%</p>
+                </div>
+                <div className="box-right-bottom red">
+                  <AccountBoxRoundedIcon />
+                </div>
+              </div>
+            </div>
+            <div className="admin-box">
+              <div className="box-left">
+                <p className="box-title">WALLET</p>
+                <p className="box-value">₹{wallet}</p>
+                <Link
+                  to="/admin-dashboard/transaction"
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  <p className="box-desc">See Total Balance</p>
+                </Link>
+              </div>
+              <div className="box-right">
+                <div className="box-right-top green">
+                  <KeyboardArrowUpSharpIcon />
+                  <p>+2%</p>
+                </div>
+                <div className="box-right-bottom green">
+                  <Link to="/admin-dashboard/Payment">
+                    <button className="gen2">Pay</button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+            <div className="admin-box box-report">
+              <div className="box-left">
+                <p className="box-title">MONTHLY REPORT</p>
+                {/* <p className="box-value">Month</p> */}
+                <select name="month" id="month" style={{ padding: "5px" }}>
+                  <option value="current">Current</option>
+                  <option value="prev">Previous</option>
+                </select>
+                <button className="gen">Generate</button>
+              </div>
+            </div>
+          </div>
+          <div className="bor">
+            <h2 className="pay_header">Payment Options</h2>
+            <div className="pay_info">
+              <div className="pay_opt">
+                <input
+                  type="radio"
+                  onChange={handleChangeRadio}
+                  name="pay"
+                  value='card'
+                  id="card"
+                />{" "}
+                <span>
+                  PAYMENT WITH CARD{" "}
+                  <img
+                    src="https://w7.pngwing.com/pngs/32/363/png-transparent-visa-master-card-and-american-express-mastercard-payment-visa-credit-card-emv-credit-card-visa-and-master-card-background-text-display-advertising-logo-thumbnail.png"
+                    alt=""
+                    className="pay_img"
+                  />
+                </span>
+              </div>
+              <div className="pay_opt">
+                <input
+                  type="radio"
+                  onChange={handleChangeRadio}
+                  name="pay"
+                  value='check'
+                  id="check"
+                />{" "}
+                <span>PAYMENT WITH CHECK</span>
+              </div>
+              {/* <div className="pay_box">
+                <p className="box-title">CARD</p>
+                <form action="/create-checkout-session" method="POST">
+                    <button type="submit" className="checkout-btn">Checkout</button>
+                  </form>
+              </div>
+              <div className="pay_box">
+                <p className="box-title">CHECK</p>
+              </div> */}
+            </div>
+            {select &&
+              (card ? (
+                <form action="/create-checkout-session" method="POST">
+                  <button type="submit">Checkout</button>
+                </form>
+              ) : (
+                <form action="/create-checkout-session" method="POST">
+                  <button type="submit">Check</button>
+                </form>
+              ))}
+
+            {/* <Box sx={{ width: "15%", margin: "5px auto" }}>
+              <Box
+                sx={{ borderBottom: 1, borderColor: "divider" }}
+                className="pay_tabs"
+              >
+                <Tabs
+                  value={value}
+                  onChange={handleChange}
+                  aria-label="basic tabs example"
+                >
+                  <Tab label="CARD" />
+                  <Tab label="CHECK" />
+                </Tabs>
+              </Box>
+
+              <TabPanel value={value} index={0}>
+                <form action="/create-checkout-session" method="POST">
+                  <button type="submit">Checkout</button>
+                </form>
+              </TabPanel>
+
+              <TabPanel value={value} index={1}>
+              </TabPanel>
+            </Box> */}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
 
 const Message = ({ message }) => (
   <section>

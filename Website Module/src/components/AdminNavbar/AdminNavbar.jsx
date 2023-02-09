@@ -23,12 +23,12 @@ const AdminNavbar = () => {
             >
               <li>Register</li>
             </Link>
-            <Link
+            {/* <Link
               style={{ textDecoration: "none", color: "white" }}
               to="/admin-dashboard/Payment"
             >
               <li>Pay</li>
-            </Link>
+            </Link> */}
           </ul>
         </div>
       </div>

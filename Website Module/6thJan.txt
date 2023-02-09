@@ -19,3 +19,31 @@ pratham:
 5)Cash by check
 
   
+
+<h2 className="pay_header">Payment Using</h2>
+        <Box sx={{ width: "15%", margin: "5px auto" }}>
+          <Box
+            sx={{ borderBottom: 1, borderColor: "divider" }}
+            className="pay_tabs"
+          >
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              aria-label="basic tabs example"
+            >
+              <Tab label="CARD" />
+              <Tab label="CHECK" />
+            </Tabs>
+          </Box>
+
+          <TabPanel value={value} index={0}>
+            {/* <MenuCardList data={IceCreams} /> */}
+            <form action="/create-checkout-session" method="POST">
+              <button type="submit">Checkout</button>
+            </form>
+          </TabPanel>
+
+          <TabPanel value={value  } index={1}>
+            {/* <MenuCardList data={MainCourse} /> */}
+          </TabPanel>
+        </Box>

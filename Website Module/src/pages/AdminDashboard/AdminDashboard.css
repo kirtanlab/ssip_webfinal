@@ -115,3 +115,12 @@
   height: 33vh;
   padding: 10px 20px;
 }
+
+.gen2{
+  position: relative;
+  bottom: 4px;
+  right: -4px;
+  padding: 6px 9px;
+  margin-bottom: 0;
+  margin-top: 0;
+}
