@@ -41,7 +41,7 @@ const NewPassword = () => {
           }
         })
         .catch((err) => {
-          //le.log(err.response.data.msg,'fsdffdafa')
+          console.log(err.response.data.msg, "fsdffdafa");
         });
     } else {
       alert("Please enter same password and confirm password");
@@ -53,7 +53,7 @@ const NewPassword = () => {
       <div className="otp-outer">
         <h1 className="otp-title">Enter New Password</h1>
         <input
-          type="text"
+          type="password"
           name="forget-password"
           id="forget-password"
           onChange={handlePasswordChange}
@@ -61,7 +61,7 @@ const NewPassword = () => {
         />
         <h1 className="otp-title">Confirm Password</h1>
         <input
-          type="text"
+          type="password"
           name="forget-password-confirm"
           id="forget-password-confirm"
           onChange={handleConfirmChange}
