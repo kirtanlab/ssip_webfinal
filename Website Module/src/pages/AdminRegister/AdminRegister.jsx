@@ -22,6 +22,7 @@ const AdminRegister = () => {
         obj
       );
       console.log("add_data", data);
+      alert("User is Registered");
     } catch (err) {
       console.log(err);
       throw err;

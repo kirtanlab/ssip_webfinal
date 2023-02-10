@@ -119,7 +119,7 @@ const CollapsibleBox = ({
                 className="completed2"
                 onClick={KOT_completedHandler}
               >
-                <p className="completed_text">Completed12</p>
+                <p className="completed_text">Completed</p>
               </button>
               <p className="completed_text" style={{ display: "flex" }}>
                 OTP: {otp}
@@ -133,7 +133,7 @@ const CollapsibleBox = ({
               className="completed2"
               onClick={completedHandler}
             >
-              <p className="completed_text">Completed23</p>
+              <p className="completed_text">Completed</p>
             </button>
           </div>
         )}
