@@ -1,0 +1,10 @@
+1) Calling Success Api after successful Payment
+2) Shuffling
+3) Payment Screen
+4) 2nd Graph
+5) Monthly Report Design
+6) Wallet Price in Canteen 
+7)Total Number of Users
+8)Not Showing Wallet details in admin/Payment screen
+
+-->Main Feature : CASHPAYMENT from ADMIN to CANTEEN

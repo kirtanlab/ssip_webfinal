@@ -46,20 +46,23 @@ const HomeOwnerDashboard = ({
     }
     setloaded(true);
   }, []);
+
   useEffect(() => {
     if (Flag) {
       setloading(false);
     }
     const interval = setInterval(() => {
       getCurrentOrders();
+
       console.log("item", newOrder);
       setTime(Date.now());
-    }, 2000);
+    }, 50000);
 
     return () => {
       clearInterval(interval);
     };
   });
+
   return (
     <>
       {loading === false ? (

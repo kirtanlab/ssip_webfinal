@@ -20,8 +20,9 @@ const WalletOwnerDashboard = () => {
     //le.log("kirtan");
     return <p>Hello</p>;
   };
+
   const btn2_handle = () => {
-    return <p>lol</p>;
+    navigate("/owner-dashboard/profileScreen");
   };
   return (
     <div className="owner-dashboard-container">
@@ -33,9 +34,7 @@ const WalletOwnerDashboard = () => {
           <div className="header_handle">
             <Header
               title="kirtan"
-              btn1={btn1_handle}
-              btn1title={<HistoryIcon sx={{ fontSize: 40 }} />}
-              btn2="btn2_handle"
+              btn2={btn2_handle}
               btn2title={<AccountCircleIcon sx={{ fontSize: 40 }} />}
             />
           </div>

@@ -24,7 +24,21 @@ const CollapsibleBox = ({
   const toggle = () => {
     setOpen(!open);
   };
+  const KOT_completedHandler = () => {
+    async function KOT_completedButton_action() {
+      await axios.get(`${API.canteen_server}/api/v1/bill/${orderId}`, {
+        headers: { Authorization: `Bearer ${token_main}` },
+      });
+    }
+    function KOT_completedButton() {
+      KOT_completedButton_action();
+      console.log("completed");
+      setOrderID(orderId);
+      getOrderHistory();
+    }
 
+    return <div className="btns">{KOT_completedButton()}</div>;
+  };
   const labels = () => {
     return (
       <div className="labels">
@@ -46,6 +60,7 @@ const CollapsibleBox = ({
           headers: { Authorization: `Bearer ${token_main}` },
         }
       );
+      console.log("done guest");
     }
     function completedButton() {
       completedButton_action();
@@ -53,38 +68,38 @@ const CollapsibleBox = ({
       setOrderID(orderId);
       getOrderHistory();
     }
-    const conditional_render = () => {
-      if (cust_name !== "Guest") {
-        return (
-          <div className="competed">
-            <div
-              type="button"
-              className="completed3"
-              onClick={completedHandler}
-            >
-              <p className="completed_text" style={{ color: "green" }}>
-                OTP: {otp}
-              </p>
-            </div>
-          </div>
-        );
-      } else {
-        <div className="competed">
-          <button
-            type="button"
-            className="completed1"
-            onClick={() => {
-              console.log("clicked");
-              completedButton();
-            }}
-          >
-            <p className="completed_text">Completed</p>
-          </button>
-        </div>;
-      }
-    };
 
-    return <div className="btns">{conditional_render()}</div>;
+    // const conditional_render = () => {
+    // if (cust_name !== "Guest") {
+    //   return (
+    //     <div className="competed">
+    //       <div
+    //         type="button"
+    //         className="completed3"
+    //         onClick={completedHandler}
+    //       >
+    //         <p className="completed_text" style={{ color: "green" }}>
+    //           OTP23: {otp}
+    //         </p>
+    //       </div>
+    //     </div>
+    //   );
+    // } else {
+    //   <div className="competed">
+    //     <button
+    //       type="button"
+    //       className="completed1"
+    //       onClick={() => {
+    //         console.log("clicked");
+    //         completedButton();
+    //       }}
+    //     >
+    //       {/* <p className="completed_text">Completed21</p> */}
+    //     </button>
+    //   </div>;
+    // }
+
+    return <div className="btns">{completedButton()}</div>;
   };
 
   const dropped = () => {
@@ -96,13 +111,13 @@ const CollapsibleBox = ({
             return <OrderItem dishname={item.dishName} qty={item.qty} />;
           })}
 
-        {_button != true ? (
+        {_button != true ? ( //Button is false then KOT
           <div className="competed">
             <div type="button" className="completed3">
               <button
                 type="button"
                 className="completed2"
-                onClick={completedHandler}
+                onClick={KOT_completedHandler}
               >
                 <p className="completed_text">Completed12</p>
               </button>

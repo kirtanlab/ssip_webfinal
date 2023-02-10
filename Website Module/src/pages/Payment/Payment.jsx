@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import AdminNavbar from "../../components/AdminNavbar/AdminNavbar";
 import PropTypes from "prop-types";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import "./Payment.css";
@@ -165,8 +163,8 @@ const ProductDisplay = ({ token_main, wallet, totalCustomers }) => {
 
     if (e.target.value === "card") {
       setCard(true);
-    }else{
-      setCard(false)
+    } else {
+      setCard(false);
     }
   };
 
@@ -242,7 +240,7 @@ const ProductDisplay = ({ token_main, wallet, totalCustomers }) => {
                   type="radio"
                   onChange={handleChangeRadio}
                   name="pay"
-                  value='card'
+                  value="card"
                   id="card"
                 />{" "}
                 <span>
@@ -259,7 +257,7 @@ const ProductDisplay = ({ token_main, wallet, totalCustomers }) => {
                   type="radio"
                   onChange={handleChangeRadio}
                   name="pay"
-                  value='check'
+                  value="check"
                   id="check"
                 />{" "}
                 <span>PAYMENT WITH CHECK</span>
@@ -323,6 +321,13 @@ const Message = ({ message }) => (
 );
 
 export default function Payment() {
+  const handle_success = async () => {
+    console.log("Payment started");
+    await axios.get(`${API.admin_server}/api/v1/admin/fullfillpayment`, {
+      headers: {},
+    });
+    console.log("Payment finished");
+  };
   const [message, setMessage] = useState("");
 
   useEffect(() => {
@@ -330,6 +335,7 @@ export default function Payment() {
     const query = new URLSearchParams(window.location.search);
 
     if (query.get("success")) {
+      handle_success();
       setMessage("Order placed! You will receive an email confirmation.");
     }
 
