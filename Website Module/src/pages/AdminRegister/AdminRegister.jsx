@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { API } from "../../constants/API";
 const AdminRegister = () => {
   const clickHandler = async (e) => {
+    e.preventDefault();
+    console.log("clale");
     const obj = {
       name: document.f1.name.value,
       email: document.f1.email.value,
@@ -14,11 +16,16 @@ const AdminRegister = () => {
       address: document.f1.address.value,
     };
     //le.log(obj);
-    const data = await Axios.post(
-      `${API.auth_server}/api/v1/user/register`,
-      obj
-    );
-    //le.log("add_data", data);
+    try {
+      const data = await Axios.post(
+        `${API.auth_server}/api/v1/user/register`,
+        obj
+      );
+      console.log("add_data", data);
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
   };
   const token_main = useSelector((state) => state.auth.token_admin);
   const navigate = useNavigate();
@@ -91,7 +98,7 @@ const AdminRegister = () => {
             <input
               type="submit"
               value="SUBMIT"
-              onClick={clickHandler}
+              onClick={(e) => clickHandler(e)}
               className="submit-btn"
             />
           </form>
