@@ -154,6 +154,8 @@ const ProductDisplay = ({ token_main, wallet, totalCustomers }) => {
   const [value, setValue] = useState(0);
   const [card, setCard] = useState(false);
   const [select, setSelect] = useState(false);
+  const [month, setMonth] = useState("Current");
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -224,11 +226,32 @@ const ProductDisplay = ({ token_main, wallet, totalCustomers }) => {
               <div className="box-left">
                 <p className="box-title">MONTHLY REPORT</p>
                 {/* <p className="box-value">Month</p> */}
-                <select name="month" id="month" style={{ padding: "5px" }}>
-                  <option value="current">Current</option>
-                  <option value="prev">Previous</option>
-                </select>
-                <button className="gen">Generate</button>
+                <select
+                value={month}
+                onChange={(e) => {
+                  setMonth(e.target.value);
+                  console.log(e.target.value);
+                }}
+                id="month"
+                style={{ padding: "5px" }}
+              >
+                <option value="current">Current</option>
+                <option value="prev">Previous</option>
+              </select>
+              <a
+                href={
+                  // month === "prev"
+                  month === "current" ? 
+                  "http://127.0.0.1:5000/api/v1/admin/thismonthreport"
+                  :
+                  "http://127.0.0.1:5000/api/v1/admin/lastmonthreport"
+                  
+                  // : "http://127.0.0.1:5000/api/v1/admin/thismonthreport"
+                }
+                className="ad-btn"
+              >
+                Generate
+              </a>
               </div>
             </div>
           </div>
