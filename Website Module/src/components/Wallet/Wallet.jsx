@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Wallet.css";
 import AccountBoxRoundedIcon from "@mui/icons-material/AccountBoxRounded";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -12,6 +12,16 @@ import RevenueBox from "../RevenueBox/RevenueBox";
 
 const Wallet = () => {
   const [month, setMonth] = React.useState("current");
+  const [balance, setBalance] = React.useState();
+  const balance_fetch = async () => {
+    const data = await axios.get(`${API.canteen_server}/api/v1/canteen/wallet`);
+    // console.log("data", data.data.wallet);
+    let bal = data.data.wallet;
+    setBalance(bal);
+  };
+  useEffect(() => {
+    balance_fetch();
+  }, []);
   return (
     <div className="home-container">
       <div className="top-components">
@@ -63,7 +73,7 @@ const Wallet = () => {
         <div className="wallet-box">
           <div className="box-left">
             <p className="box-title">WALLET</p>
-            <p className="box-value">₹2561</p>
+            <p className="box-value">₹{balance}</p>
             <p className="box-desc">See Total Balance</p>
           </div>
           <div className="box-right">
