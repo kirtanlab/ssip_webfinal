@@ -28,6 +28,7 @@
 .box-desc {
   text-decoration: dotted;
   cursor: pointer;
+  margin-top: 45px;
 }
 
 .btn {
@@ -136,7 +137,7 @@
   }
 
   .box-left {
-    margin-top: -15px;
+    margin-top: -9px;
   }
 
   .dropped {

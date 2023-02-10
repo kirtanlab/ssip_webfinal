@@ -114,6 +114,7 @@
   overflow: scroll;
   height: 33vh;
   padding: 10px 20px;
+  position: relative;
 }
 
 .gen2 {
@@ -132,4 +133,9 @@
   top: 15px;
   padding: 3px 5px;
   border-radius: 15px;
+}
+
+.dt-cont{
+  margin-top: 47px;
+  overflow-y: scroll;
 }
