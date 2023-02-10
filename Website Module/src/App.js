@@ -25,6 +25,7 @@ import UnknownScreen from "./pages/UnknownScreen/UnknownScreen";
 import Payment_Failure from "./pages/Payment_Failure/Payment_Failure";
 import Payment_Success from "./pages/Payment_Success/Payment_Success";
 function App() {
+  // Done in Kandarp's PC
   // const _Login = lazy(() => import("./pages/Login/Login"));
   // const _HomeOwnerDashboard = lazy(() =>
   //   import("./pages/HomeOwnerDashboard/HomeOwnerDashboard")

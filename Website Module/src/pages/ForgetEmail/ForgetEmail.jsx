@@ -96,7 +96,7 @@ const ForgetEmail = () => {
                 onChange={handleChange}
                 value={email}
               />
-              {Error && <p>{Error}</p>}
+              {Error && <p className="email-err">{Error}</p>}
               {!successMail ? (
                 <button
                   type="button"
