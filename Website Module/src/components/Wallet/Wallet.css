@@ -146,3 +146,41 @@
     margin-top: -10px;
   }
 }
+
+.pay-btn {
+  padding: 6px 10px;
+  margin-left: 0;
+  margin-bottom: 0;
+  position: relative;
+  bottom: 22px;
+}
+
+.report-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 305px;
+}
+
+.chart-btn {
+  margin: 10px 0px 0px 0px;
+  padding: 5px 9px;
+}
+
+.gen-btn {
+  margin-top: 10px;
+  color: white;
+  background: #ff4b2b;
+  border-radius: 20px;
+  padding: 6px 9px;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
+  cursor: pointer;
+}
+
+.boxed {
+  display: flex;
+}

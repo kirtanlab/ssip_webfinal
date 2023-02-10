@@ -44,6 +44,7 @@ const HomeOwnerDashboard = ({
     if (!token) {
       navigate("/");
     }
+    console.log("orders", newOrder);
     setloaded(true);
   }, []);
 
@@ -56,7 +57,7 @@ const HomeOwnerDashboard = ({
 
       console.log("item", newOrder);
       setTime(Date.now());
-    }, 50000);
+    }, 5000);
 
     return () => {
       clearInterval(interval);
@@ -94,7 +95,7 @@ const HomeOwnerDashboard = ({
                         orderId={item.orderdetail._id}
                         item_arr={item.items}
                         otp={item.orderdetail.otp}
-                        cust_name={item.userdetail.username}
+                        cust_name={item.userdetail}
                       />
                     );
                   })}

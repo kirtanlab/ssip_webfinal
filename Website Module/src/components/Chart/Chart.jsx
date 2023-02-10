@@ -45,7 +45,7 @@ const Chart = () => {
   // ];
   const handle_data = async () => {
     const data = await axios.get(`${API.django_server}`);
-    console.log(data.data.Graph);
+    console.log("called", data.data.Graph);
     // const peopleArrays = [data.data.Graph];
 
     // const peopleObjects = peopleArrays.map(([name, qty]) => ({

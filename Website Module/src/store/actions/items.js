@@ -1,11 +1,7 @@
 // import item from '../../models/item';
-import ColdBeverages from "../../DummyData/ColdBeverages";
-import HotBeverages from "../../DummyData/HotBeverages";
-import Starters from "../../DummyData/Starters";
-import Dessert from "../../DummyData/Dessert";
+
 import axios from "axios";
 import { API } from "../../constants/API";
-import { useSelector, useDispatch } from "react-redux";
 
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
 export const CREATE_PRODUCT = "CREATE_PRODUCT";
@@ -89,38 +85,40 @@ export const setDummyHot = () => {
           },
         }
       );
+      console.log("entered");
       if (data.status === 200) {
         const transformedIcecreams = [];
         const transformedMainCourse = [];
         const transformedStarters = [];
-        for (const key in data.data.data.IceCream) {
+        console.log("200", data.data.data);
+        for (const key in data.data.data?.["Beverages/Dessert"]) {
           transformedIcecreams.push({
-            id: data?.data?.data?.IceCream[key]?._id,
-            price: data?.data?.data?.IceCream[key]?.price,
-            name: data.data.data?.IceCream[key]?.name,
-            url: data.data.data?.IceCream[key]?.imageUrl,
-            isAvailable: data.data.data?.IceCream[key]?.isAvailable,
+            id: data?.data?.data?.["Beverages/Dessert"][key]?._id,
+            price: data?.data?.data?.["Beverages/Dessert"][key]?.price,
+            name: data.data.data?.["Beverages/Dessert"][key]?.name,
+            url: data.data.data?.["Beverages/Dessert"][key]?.imageUrl,
+            isAvailable:
+              data.data.data?.["Beverages/Dessert"][key]?.isAvailable,
           });
         }
-        for (const key in data.data.data.Starter) {
+        for (const key in data.data.data?.["Breakfast/Snacks"]) {
           transformedStarters.push({
-            id: data?.data?.data?.Starter[key]?._id,
-            price: data?.data?.data?.Starter[key]?.price,
-            name: data.data.data?.Starter[key]?.name,
-            url: data.data.data?.Starter[key]?.imageUrl,
-            isAvailable: data.data.data?.Starter[key]?.isAvailable,
+            id: data.data.data?.["Breakfast/Snacks"][key]?._id,
+            price: data.data.data?.["Breakfast/Snacks"][key]?.price,
+            name: data.data.data?.["Breakfast/Snacks"][key]?.name,
+            url: data.data.data?.["Breakfast/Snacks"][key]?.imageUrl,
+            isAvailable: data.data.data?.["Breakfast/Snacks"][key]?.isAvailable,
           });
         }
-        for (const key in data.data.data.MainCourse) {
+        for (const key in data.data.data?.["MainCourse"]) {
           transformedMainCourse.push({
-            id: data?.data?.data?.MainCourse[key]?._id,
-            price: data?.data?.data?.MainCourse[key]?.price,
-            name: data.data.data?.MainCourse[key]?.name,
-            url: data.data.data?.MainCourse[key]?.imageUrl,
-            isAvailable: data.data.data?.MainCourse[key]?.isAvailable,
+            id: data?.data?.data?.["MainCourse"][key]?._id,
+            price: data?.data?.data?.["MainCourse"][key]?.price,
+            name: data.data.data?.["MainCourse"][key]?.name,
+            url: data.data.data?.["MainCourse"][key]?.imageUrl,
+            isAvailable: data.data.data?.["MainCourse"][key]?.isAvailable,
           });
         }
-        console.log("transformer_icecream", transformedIcecreams);
         dispatch({
           type: SET_STARTERS,
           products: transformedStarters,

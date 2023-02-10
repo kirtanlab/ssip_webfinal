@@ -1,5 +1,5 @@
 import MenuCardList from "../MenuCardsList/MenuCardList";
-import { useSelector, useDispatch, connect } from "react-redux";
+import { connect } from "react-redux";
 
 import * as itemsAction from "../../store/actions/items";
 import * as React from "react";
@@ -45,9 +45,6 @@ function a11yProps(index) {
 
 const Menu = ({ setDummyHot, Starters, MainCourse, IceCreams, token }) => {
   const [value, setValue] = React.useState(0);
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [onRefreshing, setOnRefreshing] = React.useState(false);
-  const [error, setError] = React.useState(false);
   console.log("Log");
   let navigate = useNavigate();
   const handleChange = (event, newValue) => {
@@ -71,9 +68,9 @@ const Menu = ({ setDummyHot, Starters, MainCourse, IceCreams, token }) => {
           onChange={handleChange}
           aria-label="basic tabs example"
         >
-          <Tab label="IceCream" {...a11yProps(0)} />
+          <Tab label="Dessert" {...a11yProps(0)} />
           <Tab label="MainCourse" {...a11yProps(1)} />
-          <Tab label="Starter" {...a11yProps(2)} />
+          <Tab label="Snacks" {...a11yProps(2)} />
         </Tabs>
       </Box>
 

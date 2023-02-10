@@ -116,7 +116,7 @@
   padding: 10px 20px;
 }
 
-.gen2{
+.gen2 {
   position: relative;
   bottom: 4px;
   right: -4px;
@@ -125,11 +125,11 @@
   margin-top: 0;
 }
 
-.ad-btn{
+.rep-btn {
   color: white;
   background: #ff4b2b;
   position: relative;
-  top: 6px;
+  top: 15px;
   padding: 3px 5px;
   border-radius: 15px;
 }

@@ -83,7 +83,9 @@ const AdminTransaction = ({ totalCustomers, token_main, wallet }) => {
                 <p>+2%</p>
               </div>
               <div className="box-right-bottom green">
-              <Link to='/admin-dashboard/Payment'><button className="gen2">Pay</button></Link>
+                <Link to="/admin-dashboard/Payment">
+                  <button className="gen2">Pay</button>
+                </Link>
               </div>
             </div>
           </div>
@@ -106,14 +108,13 @@ const AdminTransaction = ({ totalCustomers, token_main, wallet }) => {
               <a
                 href={
                   // month === "prev"
-                  month === "current" ? 
-                  "http://127.0.0.1:5000/api/v1/admin/thismonthreport"
-                  :
-                  "http://127.0.0.1:5000/api/v1/admin/lastmonthreport"
-                  
+                  month === "current"
+                    ? "http://127.0.0.1:5000/api/v1/admin/thismonthreport"
+                    : "http://127.0.0.1:5000/api/v1/admin/lastmonthreport"
+
                   // : "http://127.0.0.1:5000/api/v1/admin/thismonthreport"
                 }
-                className="ad-btn"
+                className="rep-btn"
               >
                 Generate
               </a>

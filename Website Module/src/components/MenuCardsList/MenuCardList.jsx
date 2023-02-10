@@ -4,7 +4,7 @@ import Cards from "../Card/Cards";
 import "./MenuCardList.css";
 
 const MenuCardList = ({ data }) => {
-  // console.log('menucardlist',data);
+  console.log("menucardlist", data);
   return (
     <div className="menu-card-list-container">
       {data.map((item) => {

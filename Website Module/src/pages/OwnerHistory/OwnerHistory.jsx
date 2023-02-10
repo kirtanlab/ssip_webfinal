@@ -26,6 +26,7 @@ const OwnerHistory = ({
     if (!token) {
       navigate("/");
     }
+    console.log("order host", orderHistory);
     getOrderHistory();
     setHistloaded(true);
   }, []);
@@ -67,11 +68,11 @@ const OwnerHistory = ({
                   orderHistory.map((item) => {
                     return (
                       <CollapsibleGen
-                        _button={item.data.button}
-                        orderId={item.data._id}
+                        _button={item.orderdetail.button}
+                        orderId={item.orderdetail._id}
                         item_arr={item.items}
-                        otp={item.data.otp}
-                        cust_name={item.userdetail.username}
+                        otp={item.orderdetail.otp}
+                        cust_name={item.userdetail}
                       />
                     );
                   })}

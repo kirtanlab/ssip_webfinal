@@ -7,123 +7,9 @@ import PropTypes from "prop-types";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import "./Payment.css";
-// import AdminNavbar from "../../components/AdminNavbar/AdminNavbar";
 import AccountBoxRoundedIcon from "@mui/icons-material/AccountBoxRounded";
-import CurrencyRupeeSharpIcon from "@mui/icons-material/CurrencyRupeeSharp";
 import KeyboardArrowUpSharpIcon from "@mui/icons-material/KeyboardArrowUpSharp";
-
-// const Payment = () => {
-//   let [date, setDate] = React.useState("07/02/2023");
-//   let [amt, setAmt] = React.useState();
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     try {
-//       let res = await fetch(
-//         `${API.payment_server}/api/v1/payment/create-checkout-session`,
-//         {
-//           method: "POST",
-//           // {Headers: { 'Content-Type': 'application/json',}},
-//           body: JSON.stringify({
-//             date: date,
-//             amount: amt,
-//           }),
-//         }
-//       );
-//       let resJson = await res.json();
-//       if (res.status === 200) {
-//         setAmt("");
-//         setDate("");
-//       } else {
-//         console.log("Err: some error");
-//       }
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   };
-
-//   // const handle_Payment = async () => {
-//   //   await axios.post(
-//   //     `${API.payment_server}/api/v1/payment/create-checkout-session`,
-//   //     {
-//   //       amount: amt,
-//   //       date: date,
-//   //     },
-//   //     {
-//   //       headers: {
-//   //         "Content-Type": "application/json",
-//   //       },
-//   //     }
-//   //   );
-
-//   //   const response = await fetch()
-//   //   fetch("http://example.com/movies.json")
-//   //     .then((response) => response.json())
-//   //     .then((data) => console.log(data));
-//   //   try {
-//   //     console.log(data);
-//   //   } catch (err) {
-//   //     console.error(err);
-//   //     throw err;
-//   //   }
-//   // };
-
-//   // let url = `${API.payment_server}/api/v1/payment/create-checkout-session`;
-//   // let data = {
-//   //   amount: amt,
-//   //   date: date,
-//   // };
-//   // const response = {};
-//   // try {
-//   //   response = await fetch(url, {
-//   //     method: "POST", // *GET, POST, PUT, DELETE, etc.
-//   //     // mode: "cors", // no-cors, *cors, same-origin
-//   //     // cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-//   //     // credentials: "same-origin", // include, *same-origin, omit
-//   //     headers: {
-//   //       "Content-Type": "application/json",
-//   //       // 'Content-Type': 'application/x-www-form-urlencoded',
-//   //     },
-//   //     // redirect: "follow", // manual, *follow, error
-//   //     // referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-//   //     body: JSON.stringify(data), // body data type must match "Content-Type" header
-//   //   });
-//   // } catch (e) {
-//   //   console.error(e);
-//   //   throw e;
-//   // }
-//   // console.log(response);
-//   // return response.json(); // parses JSON response into native JavaScript objects
-//   // };
-
-//   return (
-//     <div className="form">
-//       <form>
-//         <input
-//           value={date}
-//           onChange={(e) => {
-//             console.log(e.target.value);
-//             setDate(e.target.value);
-//           }}
-//           label="date"
-//           type="text"
-//         />
-//         <input
-//           value={amt}
-//           onChange={(e) => {
-//             console.log(e.target.value);
-//             setAmt(e.target.value);
-//           }}
-//           label="amt"
-//           type="Number"
-//         />
-//         <input type="submit" value="SUBMIT" onClick={handleSubmit} />
-//       </form>
-//     </div>
-//   );
-// };
-// export default Payment;
-
+import { useSelector } from "react-redux";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -150,15 +36,27 @@ TabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-const ProductDisplay = ({ token_main, wallet, totalCustomers }) => {
+const ProductDisplay = ({ token_main, totalCustomers }) => {
   const [value, setValue] = useState(0);
   const [card, setCard] = useState(false);
   const [select, setSelect] = useState(false);
-  const [month, setMonth] = useState("Current");
+  const [month, setMonth] = useState("current");
+  const [loading, setLoading] = useState(false);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const wallet = useSelector((state) => state.wallet.Wallet);
+  const ispayButton = async () => {
+    const data = await axios.get(
+      `${API.canteen_server}/api/v1/cashpayment/isPayButton`
+    );
+    // console.log("ispay", data);
+    setLoading(data.data.bool);
   };
+  useEffect(() => {
+    ispayButton();
+  }, []);
+  // const handleChange = (event, newValue) => {
+  //   setValue(newValue);
+  // };
 
   const handleChangeRadio = (e) => {
     setSelect("true");
@@ -169,6 +67,25 @@ const ProductDisplay = ({ token_main, wallet, totalCustomers }) => {
       setCard(false);
     }
   };
+  function handleClick(e) {
+    e.preventDefault();
+    console.log("handleClick");
+    async function handleclick() {
+      console.log("tested");
+      try {
+        const data = await axios.get(
+          `${API.canteen_server}/api/v1/cashpayment/adminRequest`
+        );
+        console.log("data Payment", data);
+      } catch (err) {
+        console.log(err);
+        throw err;
+      }
+
+      setLoading(true);
+    }
+    handleclick();
+  }
 
   return (
     <section>
@@ -227,110 +144,88 @@ const ProductDisplay = ({ token_main, wallet, totalCustomers }) => {
                 <p className="box-title">MONTHLY REPORT</p>
                 {/* <p className="box-value">Month</p> */}
                 <select
-                value={month}
-                onChange={(e) => {
-                  setMonth(e.target.value);
-                  console.log(e.target.value);
-                }}
-                id="month"
-                style={{ padding: "5px" }}
-              >
-                <option value="current">Current</option>
-                <option value="prev">Previous</option>
-              </select>
-              <a
-                href={
-                  // month === "prev"
-                  month === "current" ? 
-                  "http://127.0.0.1:5000/api/v1/admin/thismonthreport"
-                  :
-                  "http://127.0.0.1:5000/api/v1/admin/lastmonthreport"
-                  
-                  // : "http://127.0.0.1:5000/api/v1/admin/thismonthreport"
-                }
-                className="ad-btn"
-              >
-                Generate
-              </a>
-              </div>
-            </div>
-          </div>
-          <div className="bor">
-            <h2 className="pay_header">Payment Options</h2>
-            <div className="pay_info">
-              <div className="pay_opt">
-                <input
-                  type="radio"
-                  onChange={handleChangeRadio}
-                  name="pay"
-                  value="card"
-                  id="card"
-                />{" "}
-                <span>
-                  PAYMENT WITH CARD{" "}
-                  <img
-                    src="https://w7.pngwing.com/pngs/32/363/png-transparent-visa-master-card-and-american-express-mastercard-payment-visa-credit-card-emv-credit-card-visa-and-master-card-background-text-display-advertising-logo-thumbnail.png"
-                    alt=""
-                    className="pay_img"
-                  />
-                </span>
-              </div>
-              <div className="pay_opt">
-                <input
-                  type="radio"
-                  onChange={handleChangeRadio}
-                  name="pay"
-                  value="check"
-                  id="check"
-                />{" "}
-                <span>PAYMENT WITH CHECK</span>
-              </div>
-              {/* <div className="pay_box">
-                <p className="box-title">CARD</p>
-                <form action="/create-checkout-session" method="POST">
-                    <button type="submit" className="checkout-btn">Checkout</button>
-                  </form>
-              </div>
-              <div className="pay_box">
-                <p className="box-title">CHECK</p>
-              </div> */}
-            </div>
-            {select &&
-              (card ? (
-                <form action="/create-checkout-session" method="POST">
-                  <button type="submit">Checkout</button>
-                </form>
-              ) : (
-                <form action="/create-checkout-session" method="POST">
-                  <button type="submit">Check</button>
-                </form>
-              ))}
-
-            {/* <Box sx={{ width: "15%", margin: "5px auto" }}>
-              <Box
-                sx={{ borderBottom: 1, borderColor: "divider" }}
-                className="pay_tabs"
-              >
-                <Tabs
-                  value={value}
-                  onChange={handleChange}
-                  aria-label="basic tabs example"
+                  value={month}
+                  onChange={(e) => {
+                    setMonth(e.target.value);
+                    console.log(e.target.value);
+                  }}
+                  id="month"
+                  style={{ padding: "5px" }}
                 >
-                  <Tab label="CARD" />
-                  <Tab label="CHECK" />
-                </Tabs>
-              </Box>
+                  <option value="current">Current</option>
+                  <option value="prev">Previous</option>
+                </select>
+                <a
+                  href={
+                    // month === "prev"
+                    month === "current"
+                      ? "http://127.0.0.1:5000/api/v1/admin/thismonthreport"
+                      : "http://127.0.0.1:5000/api/v1/admin/lastmonthreport"
 
-              <TabPanel value={value} index={0}>
-                <form action="/create-checkout-session" method="POST">
-                  <button type="submit">Checkout</button>
-                </form>
-              </TabPanel>
-
-              <TabPanel value={value} index={1}>
-              </TabPanel>
-            </Box> */}
+                    // : "http://127.0.0.1:5000/api/v1/admin/thismonthreport"
+                  }
+                  className="rep-btn"
+                >
+                  Generate
+                </a>
+              </div>
+            </div>
           </div>
+          {loading ? (
+            <div className="loading">
+              <h2>Payment Processing</h2>
+              <img
+                src="https://www.freeiconspng.com/uploads/load-icon-png-8.png"
+                width="350"
+                alt=""
+              />
+            </div>
+          ) : (
+            <div className="bor">
+              <h2 className="pay_header">Payment Options</h2>
+              <div className="pay_info">
+                <div className="pay_opt">
+                  <input
+                    type="radio"
+                    onChange={handleChangeRadio}
+                    name="pay"
+                    value="card"
+                    id="card"
+                  />{" "}
+                  <span>
+                    PAYMENT WITH CARD{" "}
+                    <img
+                      src="https://w7.pngwing.com/pngs/32/363/png-transparent-visa-master-card-and-american-express-mastercard-payment-visa-credit-card-emv-credit-card-visa-and-master-card-background-text-display-advertising-logo-thumbnail.png"
+                      alt=""
+                      className="pay_img"
+                    />
+                  </span>
+                </div>
+                <div className="pay_opt">
+                  <input
+                    type="radio"
+                    onChange={handleChangeRadio}
+                    name="pay"
+                    value="check"
+                    id="check"
+                  />
+                  <span>PAYMENT WITH CHECK</span>
+                </div>
+              </div>
+              {select &&
+                (card ? (
+                  <form action="/create-checkout-session" method="POST">
+                    <button type="submit">Checkout</button>
+                  </form>
+                ) : (
+                  <form>
+                    <button type="submit" onClick={(e) => handleClick(e)}>
+                      Check
+                    </button>
+                  </form>
+                ))}
+            </div>
+          )}
         </div>
       </div>
     </section>

@@ -56,9 +56,9 @@ const AddItem = () => {
               <option selected disabled>
                 Select the Category
               </option>
-              <option value="IceCream">IceCream</option>
+              <option value="Breakfast/Snacks">Snacks</option>
               <option value="MainCourse">MainCourse</option>
-              <option value="Starter">Starter</option>
+              <option value="Beverages/Desserts">Desserts</option>
             </select>
           </div>
           <div className="form-item">

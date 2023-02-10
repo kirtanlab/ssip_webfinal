@@ -23,8 +23,9 @@ const AdminRegister = () => {
       );
       console.log("add_data", data);
       alert("User is Registered");
+      window.location.reload();
     } catch (err) {
-      console.log(err);
+      console.log(err.response.data.msg);
       throw err;
     }
   };

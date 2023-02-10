@@ -24,6 +24,7 @@ import PaymentScreen from "./pages/Payment/Payment";
 import UnknownScreen from "./pages/UnknownScreen/UnknownScreen";
 import Payment_Failure from "./pages/Payment_Failure/Payment_Failure";
 import Payment_Success from "./pages/Payment_Success/Payment_Success";
+import Payment_Req from "./pages/Payment_Req/Payment_Req";
 function App() {
   // Done in Kandarp's PC
   // const _Login = lazy(() => import("./pages/Login/Login"));
@@ -147,6 +148,10 @@ function App() {
               <Route
                 path="admin-dashboard/cancel"
                 element={<Payment_Failure />}
+              />
+              <Route
+                path="owner-dashboard/wallet/Payment_Request"
+                element={<Payment_Req />}
               />
             </Route>
           </Routes>

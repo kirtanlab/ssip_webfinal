@@ -23,7 +23,7 @@ const AdminDashboard = ({
 }) => {
   const [search, setSearch] = useState("");
   const [searchres, setSearchres] = useState([]);
-  const [month, setMonth] = useState("current");
+  const [month, setMonth] = useState("prev");
   const navigate = useNavigate();
   useEffect(() => {
     if (!token_main) {
@@ -32,27 +32,7 @@ const AdminDashboard = ({
     setOrderHistory();
     setWalletPrice();
   }, []);
-  // const handleGenerate = async () => {
-  //   console.log("calledgen");
-  //   if (month == "current") {
-  //     console.log("calledgen1");
-  //     try {
-  //     } catch (err) {
-  //       throw err;
-  //     }
-  //   } else {
-  //     console.log("calledgen2");
-  //     await axios.get(`${API.admin_server}/api/v1/admin/lastmonthreport`, {
-  //       headers: {
-  //         Authorization: `Bearer ${token_main}`,
-  //       },
-  //     });
-  //   }
-  //   console.log("calledgen3");
-  // };
-  // function handleGenerate(month) {
-  //   console.log("generate", month);
-  // }
+
   async function handleChange(e) {
     console.log("e.target.value", e.target.value);
     setSearch(e.target.value);
@@ -113,7 +93,9 @@ const AdminDashboard = ({
                 <p>+2%</p>
               </div>
               <div className="box-right-bottom green">
-              <Link to='/admin-dashboard/Payment'><button className="gen2">Pay</button></Link>
+                <Link to="/admin-dashboard/Payment">
+                  <button className="gen2">Pay</button>
+                </Link>
               </div>
             </div>
           </div>
@@ -140,17 +122,15 @@ const AdminDashboard = ({
               <a
                 href={
                   // month === "prev"
-                  month === "current" ? 
-                  "http://127.0.0.1:5000/api/v1/admin/thismonthreport"
-                  :
-                  "http://127.0.0.1:5000/api/v1/admin/lastmonthreport"
+                  month === "current"
+                    ? "http://127.0.0.1:5000/api/v1/admin/thismonthreport"
+                    : "http://127.0.0.1:5000/api/v1/admin/lastmonthreport"
                   // : "http://127.0.0.1:5000/api/v1/admin/thismonthreport"
                 }
-                className="ad-btn"
+                className="rep-btn"
               >
                 Generate
               </a>
-
               {/* </button> */}
             </div>
           </div>
