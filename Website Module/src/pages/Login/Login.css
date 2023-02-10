@@ -51,8 +51,9 @@ form {
 }
 
 h1 {
-  font-weight: bold;
+  font-weight: 300;
   margin: 0;
+  font-size: 30px;
 }
 
 p {
