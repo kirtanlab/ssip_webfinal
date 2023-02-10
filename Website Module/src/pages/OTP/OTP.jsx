@@ -8,6 +8,7 @@ import LockOpenIcon from "@mui/icons-material/LockOpen";
 import { API } from "../../constants/API";
 const OTP = () => {
   const [otp, setOtp] = React.useState("");
+  const [error, setError] = React.useState("");
 
   const email = localStorage.getItem("admin_email");
 
@@ -38,7 +39,8 @@ const OTP = () => {
         }
       })
       .catch((err) => {
-        console.log(err.response.data.msg, "otp fsdffdafa");
+        console.log(err.response.data.msg);
+        setError(err.response.data.msg);
       });
   };
 
@@ -61,6 +63,7 @@ const OTP = () => {
             onChange={handleChange}
             className="otp-boxes"
           />
+          {error && <p className="otp-err">{error}</p>}
           <button type="button" onClick={handleOtp} className="otp-btn">
             SUBMIT
           </button>
