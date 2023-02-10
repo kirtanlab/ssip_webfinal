@@ -10,6 +10,7 @@ import "./Payment.css";
 import AccountBoxRoundedIcon from "@mui/icons-material/AccountBoxRounded";
 import KeyboardArrowUpSharpIcon from "@mui/icons-material/KeyboardArrowUpSharp";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -239,6 +240,7 @@ const Message = ({ message }) => (
 );
 
 export default function Payment() {
+  let navigate = useNavigate();
   const handle_success = async () => {
     console.log("Payment started");
     await axios.get(`${API.admin_server}/api/v1/admin/fullfillpayment`, {
@@ -251,9 +253,15 @@ export default function Payment() {
   useEffect(() => {
     // Check to see if this is a redirect back from Checkout
     const query = new URLSearchParams(window.location.search);
-
+    const url = window.location.href;
+    if (url == "http://127.0.0.1:3000/?success=true") {
+      console.log("done payment");
+      navigate("admin-dashboard/success");
+      setMessage("Order placed! You will receive an email confirmation.");
+    }
     if (query.get("success")) {
       handle_success();
+      navigate("admin-dashboard/success");
       setMessage("Order placed! You will receive an email confirmation.");
     }
 

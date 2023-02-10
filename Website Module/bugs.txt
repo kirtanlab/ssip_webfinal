@@ -16,13 +16,7 @@ CSS
 
 -->Owner Payment 
 
--->Making Cards larger in Wallet Owner 
-
--->Deisgning Current Request boxes ,same for past
-
--->Employee Search Boxes 
-
--->Same for Past Orders
+-->Making Cards larger in Wallet Owner & Center
 
 -->hl for admin 
 
