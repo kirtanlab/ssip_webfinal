@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import { Link } from 'react-router-dom';
 import axios from "axios";
 // import './OTP.css'
@@ -13,6 +13,10 @@ const ForgetEmail = () => {
   const [successMail, setSuccessMail] = useState(false);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    setSuccessMail(false);
+  }, []);
+
   const handleChange = (e) => {
     setEmail(e.target.value);
   };
@@ -26,12 +30,14 @@ const ForgetEmail = () => {
     axios
       .patch(`${API.auth_server}/api/v1/admin/forgotpassword`, obj)
       .then((res) => {
+        console.log(res);
         const data = res;
-        if (data.data.res === "Success") {
+        if (data.data.otpsent === true) {
           //le.log('success');
           localStorage.setItem("admin_email", email);
-          // <Navigate replace={true}  to="/owner-dashboard"/>\
           setSuccessMail(true);
+          // <Navigate replace={true}  to="/owner-dashboard"/>
+          navigate("/otp");
         }
       })
       .catch((err) => {
@@ -40,13 +46,13 @@ const ForgetEmail = () => {
         throw err;
       });
   };
-  const handleTest = () => {
-    localStorage.setItem("email", email);
-    setSuccessMail(true);
-  };
-  function handleOTP() {
-    return <OTP />;
-  }
+  // const handleTest = () => {
+  //   localStorage.setItem("email", email);
+  //   setSuccessMail(true);
+  // };
+  // function handleOTP() {
+  //   return <OTP />;
+  // }
 
   return (
     <>
@@ -91,7 +97,7 @@ const ForgetEmail = () => {
                 value={email}
               />
               {Error && <p>{Error}</p>}
-              {!successMail && (
+              {!successMail ? (
                 <button
                   type="button"
                   onClick={handleForgetPassword}
@@ -99,16 +105,18 @@ const ForgetEmail = () => {
                 >
                   SUBMIT
                 </button>
+              ) : (
+                navigate("/otp")
               )}
 
-              <button type="button" onClick={handleTest} className="otp-btn">
+              {/* <button type="button" onClick={handleTest} className="otp-btn">
                 Test
-              </button>
+              </button> */}
             </div>
           </div>
         </div>
       ) : (
-        handleOTP()
+        navigate("/otp")
       )}
     </>
   );

@@ -38,7 +38,7 @@ const OTP = () => {
         }
       })
       .catch((err) => {
-        //le.log(err.response.data.msg,'fsdffdafa')
+        console.log(err.response.data.msg, "otp fsdffdafa");
       });
   };
 

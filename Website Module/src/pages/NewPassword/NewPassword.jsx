@@ -21,12 +21,14 @@ const NewPassword = () => {
 
   const handlePassword = () => {
     if (password === confirm) {
+      console.log("conf", password, confirm);
       const obj = {
         password: password,
       };
       axios
         .patch(`${API.admin_server}/api/v1/admin/${email}/updatePassword`, obj)
         .then((res) => {
+          console.log(res);
           const data = res;
           if (data.data.res === "success") {
             //le.log('success');
@@ -36,7 +38,7 @@ const NewPassword = () => {
           }
         })
         .catch((err) => {
-          //le.log(err.response.data.msg,'fsdffdafa')
+          console.log(err.response.data.msg, "fsdffdafa");
         });
     } else {
       alert("Please enter same password and confirm password");
