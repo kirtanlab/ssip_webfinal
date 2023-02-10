@@ -153,9 +153,17 @@ const AdminDashboard = ({
             {searchres.length <= 0 ? (
               <h1>Search Employee</h1>
             ) : (
-              searchres.map((item) => {
-                return <DetailBar data={item} />;
-              })
+              <div>
+                <div className="wid">
+                  <p className="result-id"  style={{minWidth: "170px", paddingLeft: "90px"}}s>ID</p>
+                  <p className="result-name">NAME</p>
+                  <p className="result-email">EMAIL</p>
+                  <p className="result-number">WALLET</p>
+                </div>
+                <div className="dt-cont">
+                {searchres.map((item) => <DetailBar data={item} />)} 
+                </div>
+              </div>
             )}
           </div>
         </div>
