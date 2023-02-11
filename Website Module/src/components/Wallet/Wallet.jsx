@@ -157,7 +157,6 @@ const Wallet = () => {
         </div> */}
         {chart ? (
           <div className="bottom-right">
-            <p className="box-title">Last 7 Months (income)</p>
             <Chart />
           </div>
         ) : (
