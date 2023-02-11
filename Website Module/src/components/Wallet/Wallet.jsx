@@ -24,6 +24,36 @@ const Wallet = () => {
   const [currentreq, setCurrentreq] = React.useState();
   const [pastreq, setPastreq] = React.useState();
   const [chart, setChart] = React.useState(true);
+  const data = [
+    {
+      name: "Samosa",
+      qty: 40,
+    },
+    {
+      name: "Gujrati Thali",
+      qty: 30,
+    },
+    {
+      name: "Coffee",
+      qty: 20,
+    },
+    {
+      name: "Tea",
+      qty: 27,
+    },
+    {
+      name: "Idli Sambhar",
+      qty: 18,
+    },
+    {
+      name: "Upma",
+      qty: 23,
+    },
+    {
+      name: "Poha",
+      qty: 34,
+    },
+  ];
   const balance_fetch = async () => {
     const data = await axios.get(`${API.canteen_server}/api/v1/canteen/wallet`);
     // console.log("data", data.data.wallet);
@@ -64,6 +94,18 @@ const Wallet = () => {
     };
     payreq_fetch();
   }
+  function reset() {
+    console.log("entered");
+    async function _reset() {
+      const res = await axios.get(
+        `${API.canteen_server}/api/v1/canteen/resetButton`,
+        { headers: {} }
+      );
+      console.log("done res graph", res);
+    }
+    _reset();
+  }
+
   return (
     <div className="home-container">
       <div className="top-components">
@@ -119,13 +161,8 @@ const Wallet = () => {
               >
                 GENERATE
               </a>
-              <button
-                onClick={() => {
-                  setChart(true);
-                }}
-                className="chart-btn"
-              >
-                Charts
+              <button onClick={reset()} className="chart-btn">
+                Reset
               </button>
             </div>
           </div>
@@ -162,7 +199,7 @@ const Wallet = () => {
             <p className="box-title">Last 7 Months (income)</p>
             <Chart /> 
             <p className="box-title">Last 7 Months (income)</p> */}
-            <Chart />
+            <Chart data={data} />
           </div>
         ) : (
           <div className="bottom-right">

@@ -11,9 +11,7 @@ const DetailBar_Owner = ({ data }) => {
   const handleclick = async () => {
     const res = await axios.post(
       `${API.canteen_server}/api/v1/canteen/decrementSubsQuantity/${data._id}`,
-      {
-        qty: qty,
-      },
+
       { headers: {} }
     );
     dispatch(ItemsActions.setsid(data._id));

@@ -33,7 +33,7 @@ const WalletOwnerDashboard = () => {
         <div className="owner-right">
           <div className="header_handle">
             <Header
-              title="kirtan"
+              title="Owner Analytics"
               btn2={btn2_handle}
               btn2title={<AccountCircleIcon sx={{ fontSize: 40 }} />}
             />

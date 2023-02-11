@@ -133,7 +133,7 @@
 
 .bottom-right {
   /* flex: 4 1; */
-  height: 420px;
+  height: 560px;
   width: 100%;
   object-fit: cover;
   overflow: scroll;
@@ -185,11 +185,11 @@
 
 .boxed {
   display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 327px;
-    border: 3px solid lightgray;
-    margin-bottom: 6px;
-    padding: 3px 17px 0px;
-    border-radius: 10px;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 327px;
+  border: 3px solid lightgray;
+  margin-bottom: 6px;
+  padding: 3px 17px 0px;
+  border-radius: 10px;
 }

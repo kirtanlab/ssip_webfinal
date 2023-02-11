@@ -7,6 +7,7 @@ import {
   SET_QTYERROR,
   SET_SID,
   msg,
+  SET_ID,
 } from "../actions/items";
 
 const initialState = {
@@ -17,10 +18,16 @@ const initialState = {
   del_itemid: 0,
   qtyError: "",
   sid: 0,
+  id: 0,
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case SET_ID:
+      return {
+        ...state,
+        id: action.id,
+      };
     case SET_SID:
       return {
         ...state,
