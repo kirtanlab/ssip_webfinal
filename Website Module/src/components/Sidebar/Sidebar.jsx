@@ -45,6 +45,12 @@ const Sidebar = () => {
             
           </div>
         </Link>
+        <Link to="/owner-dashboard/analysis" style={{ textDecoration: "none" }}>
+          <div className="sidebar-bottom-item">
+            <AccountBalanceWalletIcon sx={{ fontSize: 60 }}/>
+            
+          </div>
+        </Link>
       </div>
 
     </div>

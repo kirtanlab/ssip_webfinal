@@ -25,6 +25,7 @@ import UnknownScreen from "./pages/UnknownScreen/UnknownScreen";
 import Payment_Failure from "./pages/Payment_Failure/Payment_Failure";
 import Payment_Success from "./pages/Payment_Success/Payment_Success";
 import Payment_Req from "./pages/Payment_Req/Payment_Req";
+import OwnerAnalytics from './pages/OwnerAnalytics/OwnerAnalytics'
 function App() {
   // Done in Kandarp's PC
   // const _Login = lazy(() => import("./pages/Login/Login"));
@@ -127,6 +128,10 @@ function App() {
               <Route
                 path="owner-dashboard/profileScreen"
                 element={<Owner_ProfileScreen />}
+              />
+              <Route
+                path="owner-dashboard/analysis"
+                element={<OwnerAnalytics />}
               />
               <Route
                 path="owner-dashboard/unknown"

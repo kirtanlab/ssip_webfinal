@@ -89,9 +89,9 @@ const Chart = () => {
 
   return (
     <div className="render_chart" style={{ overflowY: "scroll" }}>
-      <Render_chart data={_data} />
-      <Render_chart data={_data} />
-      <Render_chart data={_data} />
+      <Render_chart _data={_data} />
+      <Render_chart _data={_data} />
+      <Render_chart _data={_data} />
     </div>
   );
 };
