@@ -15,6 +15,20 @@ export const SET_STARTERS = "SET_STARTERS";
 export const SET_ALLPRODUCT = "SET_ALLPRODUCT";
 
 export const SET_QTYERROR = "SET_QTYERROR";
+export const SET_SID = "SET_SID";
+
+export const setsid = (sid) => {
+  return async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: SET_SID,
+        sid: sid,
+      });
+    } catch (err) {
+      throw err;
+    }
+  };
+};
 
 export const setqtyError = (msg) => {
   return async (dispatch, getState) => {

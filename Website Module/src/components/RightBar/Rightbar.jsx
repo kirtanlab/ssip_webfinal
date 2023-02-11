@@ -34,7 +34,9 @@ const Rightbar = () => {
     );
   });
   const sendOrderHandler = () => {
-    navigate("/owner-dashboard/confirmOrder");
+    if (cartTotalAmount != 0) {
+      navigate("/owner-dashboard/confirmOrder");
+    }
   };
 
   const renderCartItems = (cartItems) => {

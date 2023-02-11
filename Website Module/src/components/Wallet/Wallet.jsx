@@ -84,7 +84,7 @@ const Wallet = () => {
           <div className="box-right">
             <div className="box-right-top green">
               <KeyboardArrowUpSharpIcon />
-              <p>+5%</p>
+              {/* <p>+5%</p> */}
             </div>
             <div className="box-right-bottom red">
               <AccountBoxRoundedIcon />
@@ -140,7 +140,7 @@ const Wallet = () => {
           <div className="box-right">
             <div className="box-right-top green">
               <KeyboardArrowUpSharpIcon />
-              <p>+2%</p>
+              {/* <p>+2%</p> */}
             </div>
             <div className="box-right-bottom green">
               <CurrencyRupeeSharpIcon />

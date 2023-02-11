@@ -1,6 +1,7 @@
 @import url(http://fonts.googleapis.com/earlyaccess/nunitovfbeta.css);
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap");
 * {
-  font-family: "Nunito VF Beta", sans-serif;
+  font-family: "Poppins", sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;

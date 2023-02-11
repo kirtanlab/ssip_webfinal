@@ -2,10 +2,12 @@ import React from "react";
 import "./DetailBar_Owner.css";
 import axios from "axios";
 import { API } from "../../constants/API";
-
+import { useDispatch, useSelector } from "react-redux";
+import * as ItemsActions from "../../store/actions/items";
 const DetailBar_Owner = ({ data }) => {
   let [qty, setqty] = React.useState(0);
   // console.log("DetailBar", data);
+  const dispatch = useDispatch();
   const handleclick = async () => {
     const res = await axios.post(
       `${API.canteen_server}/api/v1/canteen/decrementSubsQuantity/${data._id}`,
@@ -14,6 +16,8 @@ const DetailBar_Owner = ({ data }) => {
       },
       { headers: {} }
     );
+    dispatch(ItemsActions.setsid(data._id));
+    window.location.reload();
     console.log("DetailBar", res);
   };
   return (

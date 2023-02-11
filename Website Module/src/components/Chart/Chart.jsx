@@ -13,36 +13,36 @@ import axios from "axios";
 
 const Chart = () => {
   let [_data, setData] = React.useState();
-  // const data = [
-  //   {
-  //     name: "January",
-  //     uv: 4000,
-  //   },
-  //   {
-  //     name: "February",
-  //     uv: 3000,
-  //   },
-  //   {
-  //     name: "March",
-  //     uv: 2000,
-  //   },
-  //   {
-  //     name: "April",
-  //     uv: 2780,
-  //   },
-  //   {
-  //     name: "May",
-  //     uv: 1890,
-  //   },
-  //   {
-  //     name: "June",
-  //     uv: 2390,
-  //   },
-  //   {
-  //     name: "July",
-  //     uv: 3490,
-  //   },
-  // ];
+  const data = [
+    {
+      name: "Samosa",
+      qty: 40,
+    },
+    {
+      name: "Gujrati Thali",
+      qty: 30,
+    },
+    {
+      name: "Coffee",
+      qty: 20,
+    },
+    {
+      name: "Tea",
+      qty: 27,
+    },
+    {
+      name: "Idli Sambhar",
+      qty: 18,
+    },
+    {
+      name: "Upma",
+      qty: 23,
+    },
+    {
+      name: "Poha",
+      qty: 34,
+    },
+  ];
   const handle_data = async () => {
     const data = await axios.get(`${API.django_server}`);
     console.log("called", data.data.Graph);

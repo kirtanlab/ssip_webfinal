@@ -7,7 +7,7 @@ import Header from "../../components/Header_Home/Header";
 import PersonSearchIcon from "@mui/icons-material/PersonSearch";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Axios from "axios";
-
+// import { useDispatch, useSelector } from "react-redux";
 import Summary from "../../components/Summary/Summary";
 import Payment_Mode from "../../components/Payment_Mode/Payment_Mode";
 import Payment_inputs from "../../components/Payment_Inputs/Payment_Inputs";
@@ -25,11 +25,14 @@ const ConfirmOrder = () => {
   const cartTotalAmount = useSelector((state) => state.cart.totalAmount);
   const token = useSelector((state) => state.auth.token);
   const items = useSelector((state) => state.cart.items);
+  const sid = useSelector((state) => state.items.sid);
+
   useEffect(() => {
     if (!token) {
       navigate("/");
     }
   }, []);
+
   useEffect(() => {
     const lastvaluesfun = () => {
       const _lastvalues = [];

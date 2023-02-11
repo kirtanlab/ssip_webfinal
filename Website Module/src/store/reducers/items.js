@@ -5,6 +5,8 @@ import {
   SET_ALLPRODUCT,
   DELETE_PRODUCT,
   SET_QTYERROR,
+  SET_SID,
+  msg,
 } from "../actions/items";
 
 const initialState = {
@@ -14,10 +16,16 @@ const initialState = {
   AllItems: [],
   del_itemid: 0,
   qtyError: "",
+  sid: 0,
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case SET_SID:
+      return {
+        ...state,
+        sid: action.sid,
+      };
     case SET_QTYERROR:
       return {
         ...state,
