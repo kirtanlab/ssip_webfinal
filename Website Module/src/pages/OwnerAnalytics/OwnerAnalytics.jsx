@@ -46,6 +46,8 @@ const OwnerAnalytics = () => {
   const [chart, setChart] = React.useState(true);
   const [value, setValue] = React.useState(0);
   let [_data, setData] = React.useState([]);
+  let [subgraph, setSubGraph] = React.useState();
+  let [Datewise, setdatewise] = React.useState();
 
   const data = [
     {
@@ -111,8 +113,9 @@ const OwnerAnalytics = () => {
   }
   const handle_data = async () => {
     const data = await axios.get(`${API.django_server}`);
-    console.log("called", data.data);
+    console.log("called django", data);
     setData(data.data.Graph);
+    setSubGraph(data.data.SubscritionGraph);
   };
 
   React.useEffect(() => {
@@ -150,6 +153,7 @@ const OwnerAnalytics = () => {
       );
       console.log("DetailBar res", data.data.data);
       setGraphData(data.data.data);
+      setdatewise(data.data.Datewise);
     }
     useEffect(() => {
       handleChart();
@@ -244,7 +248,12 @@ const OwnerAnalytics = () => {
 
               <TabPanel value={value} index={2}>
                 <div className="bottom-right">
-                  <Chart data={data} />
+                  <Chart data={subgraph} />
+                </div>
+              </TabPanel>
+              <TabPanel value={value} index={3}>
+                <div className="bottom-right">
+                  <Chart data={Datewise} />
                 </div>
               </TabPanel>
             </Box>
